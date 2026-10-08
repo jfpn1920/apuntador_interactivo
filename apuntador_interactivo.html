@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>apuntador interactivo</title>
+    <link rel="stylesheet" href="apuntador_interactivo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <script src="apuntador_interactivo.js" defer></script>
+</head>
+<body>
+    <!------------------------------------------>
+    <!--|estructuracion_apuntador_interactivo|-->
+    <!------------------------------------------>
+    <main class="app">
+        <!-- Encabezado con el título y la explicación -->
+        <header>
+            <h1>Apuntador Interactivo</h1>
+            <p class="subtitulo">Pasa el cursor sobre la figura y mira cómo cambia. Abajo puedes personalizarla.</p>
+        </header>
+        <!-- Escenario: aquí está el elemento que reacciona al cursor.
+        Es una caja con espacio de sobra para que la figura pueda crecer. -->
+        <section class="escenario">
+            <!-- tabindex="0" permite llegar con el teclado (tecla Tab) y que también reaccione -->
+            <div id="objetivo" class="objetivo" tabindex="0" role="button" aria-live="polite">
+                <!-- Texto que cambia cuando el cursor está encima -->
+                <span id="objetivo-texto"></span>
+            </div>
+        </section>
+        <!-- Estadísticas: se guardan en localStorage.
+        Cada tarjeta tiene una etiqueta pequeña y un valor que escribe JavaScript. -->
+        <section class="estadisticas">
+            <div><small>Veces que pasaste</small><strong id="s-veces"></strong></div>
+            <div><small>Tiempo encima</small><strong id="s-tiempo"></strong></div>
+            <div><small>Estado</small><strong id="s-estado"></strong></div>
+        </section>
+        <!-- Panel de personalización.
+        Cada control cambia la figura al instante. -->
+        <section class="panel">
+            <h2>Personaliza la figura</h2>
+            <!-- Mensaje que aparece cuando el cursor está encima -->
+            <label for="campo-mensaje">Mensaje al pasar el cursor</label>
+            <input id="campo-mensaje" type="text" maxlength="30" autocomplete="off">
+            <!-- Color que toma la figura al pasar el cursor -->
+            <label for="campo-color">Color al pasar el cursor</label>
+            <input id="campo-color" type="color">
+            <!-- Forma de la figura -->
+            <label for="campo-forma">Forma</label>
+            <select id="campo-forma">
+                <option value="cuadrado">Cuadrado</option>
+                <option value="redondeado">Redondeado</option>
+                <option value="circulo">Círculo</option>
+            </select>
+            <!-- Tamaño de la figura (control deslizante) -->
+            <label for="campo-tamano">Tamaño: <output id="tamano-valor"></output> px</label>
+            <input id="campo-tamano" type="range" min="120" max="280" step="10">
+            <!-- Botones de acción.
+            Todo lo que cambies aquí se guarda y se recuerda al refrescar. -->
+            <div class="acciones">
+                <!-- Pone en cero los contadores -->
+                <button id="btn-contadores" class="boton secundario">Reiniciar contadores</button>
+                <!-- Vuelve a los valores originales -->
+                <button id="btn-restaurar" class="boton">Restaurar todo</button>
+            </div>
+        </section>
+        <!-- Ayuda rápida: cómo se activa la figura -->
+        <aside class="ayuda">
+            <h2>¿Cómo se activa?</h2>
+            <ul>
+                <li>Con el ratón: pasa el cursor por encima.</li>
+                <li>Con el teclado: usa la tecla Tab hasta llegar a la figura.</li>
+                <li>En el celular: mantén el dedo sobre la figura.</li>
+            </ul>
+        </aside>
+    </main>
+    <!-- Aviso por si el navegador tiene JavaScript desactivado -->
+    <noscript>Activa JavaScript para usar la figura interactiva.</noscript>
+</body>
+</html>

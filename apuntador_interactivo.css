@@ -1,0 +1,86 @@
+/* ===== VARIABLES: colores reutilizables ===== */
+:root {
+    --fondo: #14213d;       /* azul marino de fondo */
+    --panel: #1d2d50;       /* azul un poco más claro para las tarjetas */
+    --linea: #3d5a99;       /* bordes y color base de la figura */
+    --texto: #f2f4fa;       /* texto claro */
+}
+/* Quita márgenes por defecto y simplifica el cálculo de tamaños */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+/* Fondo de la página y tipografía general */
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 28px 14px;
+    font-family: 'Outfit', Arial, sans-serif;
+    color: var(--texto);
+    background: var(--fondo);
+}
+/* Contenedor principal y títulos */
+.app { width: 100%; max-width: 620px; }
+h1 { font-size: 2.3rem; font-weight: 800; line-height: 1.1; }
+h2 { margin-bottom: 8px; font-size: 1.2rem; }
+.subtitulo { margin: 8px 0 24px; line-height: 1.5; opacity: 0.85; }
+/* Escenario: centra la figura con espacio para que crezca sin tapar nada */
+.escenario { display: flex; align-items: center; justify-content: center; height: 340px; background: var(--panel); border: 2px dashed var(--linea); border-radius: 16px; }
+/* Figura interactiva: sus medidas y colores vienen de variables que cambia JavaScript */
+.objetivo {
+    --hover: #fca311;          /* color al pasar el cursor (JS lo cambia) */
+    --tamano: 200px;           /* tamaño de la figura (JS lo cambia) */
+    --radio: 36px;             /* redondez de las esquinas (JS lo cambia) */
+    --texto-hover: #14213d;    /* color del texto sobre el color elegido (JS lo cambia) */
+    width: var(--tamano);
+    height: var(--tamano);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    text-align: center;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--texto);
+    background: var(--linea);
+    border-radius: var(--radio);
+    cursor: pointer;
+    transition: transform 0.25s, background 0.25s, border-radius 0.25s, color 0.25s;
+}
+/* Estado "encima": con :hover reacciona el ratón y con .activo lo controla JavaScript */
+.objetivo:hover, .objetivo.activo { background: var(--hover); color: var(--texto-hover); transform: scale(1.15) rotate(-4deg); }
+/* Foco visible para quien navega con el teclado */
+.objetivo:focus-visible, input:focus-visible, select:focus-visible, button:focus-visible { outline: 3px solid var(--hover, #fca311); outline-offset: 3px; }
+/* Estadísticas: tres tarjetas en una fila */
+.estadisticas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 14px; text-align: center; }
+.estadisticas div { padding: 12px 6px; background: var(--panel); border-radius: 12px; }
+.estadisticas small { display: block; font-size: 0.8rem; opacity: 0.75; }
+.estadisticas strong { font-size: 1.3rem; }
+/* Panel de controles */
+.panel { margin-top: 22px; padding: 20px; background: var(--panel); border-radius: 16px; }
+.panel label { display: block; margin: 14px 0 6px; font-weight: 700; }
+input[type="text"], select { width: 100%; padding: 11px 12px; font: inherit; color: var(--texto); background: var(--fondo); border: 2px solid var(--linea); border-radius: 10px; }
+input[type="color"] { width: 64px; height: 40px; padding: 2px; background: none; border: 2px solid var(--linea); border-radius: 10px; cursor: pointer; }
+input[type="range"] { width: 100%; accent-color: #fca311; }
+/* Botones */
+.acciones { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.boton {
+    padding: 11px 22px;
+    font: inherit;
+    font-weight: 700;
+    color: var(--fondo);
+    background: #fca311;
+    border: 2px solid #fca311;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.boton.secundario { color: var(--texto); background: transparent; border-color: var(--linea); }
+.boton:hover { opacity: 0.88; }
+/* Ayuda rápida: lista con sangría */
+.ayuda { margin-top: 22px; padding: 18px 20px; border: 2px solid var(--linea); border-radius: 16px; }
+.ayuda ul { padding-left: 20px; line-height: 1.7; }
+/* En pantallas pequeñas se reduce el título y las estadísticas pasan a una columna */
+@media (max-width: 480px) {
+    h1 { font-size: 1.8rem; }
+    .estadisticas { grid-template-columns: 1fr; }
+}
+/* Respeta a quienes prefieren menos movimiento en pantalla */
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
